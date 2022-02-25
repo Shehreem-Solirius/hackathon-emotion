@@ -17,7 +17,7 @@ face_haar_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_f
 
 
 cap = cv2.VideoCapture(0)
-
+count = 0;
 while True:
     ret, test_img = cap.read()  # captures frame and returns boolean value and captured image
     if not ret:
@@ -35,7 +35,6 @@ while True:
         img_pixels /= 255
 
         predictions = model.predict(img_pixels)
-
         # find max indexed array
         max_index = np.argmax(predictions[0])
 
@@ -44,8 +43,11 @@ while True:
 
         cv2.putText(test_img, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
+
     resized_img = cv2.resize(test_img, (1000, 700))
+    resized_img = cv2.cvtColor(resized_img, cv2.COLOR_BGR2HSV)
     cv2.imshow('Facial emotion analysis ', resized_img)
+
 
     if cv2.waitKey(10) == ord('q'):  # wait until 'q' key is pressed
         break
