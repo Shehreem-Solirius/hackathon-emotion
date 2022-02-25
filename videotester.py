@@ -45,7 +45,7 @@ while True:
 
 
     resized_img = cv2.resize(test_img, (1000, 700))
-    resized_img = cv2.cvtColor(resized_img, cv2.COLOR_BGR2HSV)
+    resized_img = cv2.cvtColor(resized_img, cv2.COLOR_BGR2RGB)
     cv2.imshow('Facial emotion analysis ', resized_img)
 
 
