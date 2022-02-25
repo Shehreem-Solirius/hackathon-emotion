@@ -1,6 +1,6 @@
 # print version number; un comment when wanting to check
 # print(cv2.__version__)
-
+import cv2
 
 cap = cv2.VideoCapture(0)
 

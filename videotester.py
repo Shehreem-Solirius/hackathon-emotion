@@ -25,16 +25,16 @@ while True:
     gray_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
 
     faces_detected = face_haar_cascade.detectMultiScale(gray_img, 1.32, 5)
-    cascade_classifier = cv2.CascadeClassifier('haarcascades/haarcascade_hand.xml')
 
     for (x, y, w, h) in faces_detected:
-        while True:
-            ret, frame = cap.read()
-            frame = cv2.cvtColor(frame, 0)
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            detections = cascade_classifier.detectMultiScale(gray, 1.3, 5)
+        cv2.rectangle(test_img, (x, y), (x + w, y + h), (255, 0, 0), thickness=7)
+        roi_gray = gray_img[y:y + w, x:x + h]  # cropping region of interest i.e. face area from  image
+        roi_gray = cv2.resize(roi_gray, (224, 224))
+        img_pixels = image.img_to_array(roi_gray)
+        img_pixels = np.expand_dims(img_pixels, axis=0)
+        img_pixels /= 255
 
-        predictions = model.predict(detections)
+        predictions = model.predict(img_pixels)
 
         # find max indexed array
         max_index = np.argmax(predictions[0])
@@ -52,4 +52,3 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows
-
