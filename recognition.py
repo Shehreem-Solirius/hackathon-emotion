@@ -9,7 +9,8 @@ cap = cv2.VideoCapture(0)
 # we will now use cascade files that have pre-built objects,
 # we can build our own however we will use ready samples for now
 cascade_classifier = cv2.CascadeClassifier('haarcascades/haarcascade_hand.xml')
-
+#haarcascades/haarcascade_hand.xml
+#haarcascades/haarcascade_eye.xml
 
 while True:
     ret, frame = cap.read()
